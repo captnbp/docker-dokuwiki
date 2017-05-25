@@ -1,11 +1,13 @@
-FROM alpine:3.4
+FROM alpine:3.5
 MAINTAINER Ilya Stepanov <dev@ilyastepanov.com>
 
-ENV DOKUWIKI_VERSION 2016-06-26a
+ENV DOKUWIKI_VERSION 2017-02-19b
 ENV MD5_CHECKSUM 9b9ad79421a1bdad9c133e859140f3f2
 
+RUN apk --no-cache add libressl2.4-libssl libressl2.4-libcrypto
+
 RUN apk --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ add \
-    php7 php7-fpm php7-gd php7-session php7-xml nginx supervisor curl tar
+    php7 php7-fpm php7-gd php7-session php7-xml php7-ldap php7-openssl php7-zlib libwebp nginx supervisor curl tar
 
 RUN mkdir -p /run/nginx && \
     mkdir -p /var/www /var/dokuwiki-storage/data && \
